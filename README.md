@@ -5,7 +5,7 @@ Repository with various challenges performed in python and other languages
 
 ## Content
 
-* [Chessboard](/html/chessboards/index.html)
+* [Chessboard](https://github.com/sherphys/challenges/blob/master/html/chessboards/index.html)
 * [Algebraic Object](html/algebraic_object/index.html)
 
 ## Autor
