@@ -313,7 +313,7 @@ class ChessPiece(object):
     def possible_moves(self, position,
                        moves,
                        rules=None,
-                       board=ChessBoard()):
+                       board=None):
         """Check a square of the board where the chess piece can make a move
 
         Parameters
@@ -345,7 +345,7 @@ class ChessPiece(object):
 
         """
         self.position = position
-        self.chessboard = board
+        self.chessboard = ChessBoard() if board is None else board
         self.chessboard.in_place(position)
         place = self.chessboard._as_number_form(position)
 
@@ -383,7 +383,7 @@ class Pawn(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the Pawn can make a move
 
         Parameters
@@ -421,7 +421,7 @@ class Knight(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the Knight can make a move
 
         Parameters
@@ -458,7 +458,7 @@ class Rook(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the Rook can make a move
 
         Parameters
@@ -491,7 +491,7 @@ class Bishop(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the Bishop can make a move
 
         Parameters
@@ -524,7 +524,7 @@ class Queen(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the Queen can make a move
 
         Parameters
@@ -558,7 +558,7 @@ class King(ChessPiece):
     def __init__(self):
         ChessPiece.__init__(self)
 
-    def possible_moves(self, position, board=ChessBoard()):
+    def possible_moves(self, position, board=None):
         """Check a square of the board where the King can make a move
 
         Parameters
