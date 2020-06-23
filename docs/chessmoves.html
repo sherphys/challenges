@@ -1,0 +1,2280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>chessboards.chessmoves API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>chessboards.chessmoves</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import random
+
+OCCUPY_POSITION = 8
+MARK_POSITION = 1
+AXIS_Y = (&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;)
+AXIS_X = tuple([str(i) for i in range(1, 9)])
+
+MSG_ERROR_VALUE = &#34;{} must be a positive integer&#34;
+MSG_ERROR_LEN = &#34;{} must be {} item (given {})&#34;
+MSG_ERROR_POS = &#34;The position {} is not valid&#34;
+MSG_ERROR_TYPE = &#34;must be &#39;{}&#39; not &#39;{}&#39;&#34;
+
+
+class MoveRules():
+    &#34;&#34;&#34;Create a move rule for a chess piece in on the chessboard.
+
+    .. versionadded:: 1.0
+
+    Attributes
+    ----------
+    max_steps : int
+        Maximum number of steps per movement in a turn.
+
+    jump : bool
+        If the chess piece can jump occupied squares
+
+    special_move: dict
+        Special movement of the chess piece in certain position
+        on the chessboard
+
+    &#34;&#34;&#34;
+    def __init__(self, max_steps, jump=False, special_move=None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        max_steps : positive int
+            Maximum number of steps per movement in a turn.
+
+        jump : bool, optional
+            If the chess piece can jump occupied squares
+
+        special_move: (iterable, Points), optional
+            Special movement of the chess piece in certain positions
+            on the chessboard
+
+        Raises
+        ------
+        ValueError
+            If max_steps is not positive integer
+            If special moves has wrong number of elements
+
+        &#34;&#34;&#34;
+
+        if max_steps &lt; 1:
+            raise ValueError(MSG_ERROR_VALUE.format(&#34;max_steps&#34;))
+
+        self.max_steps_for_turn = max_steps
+        self.jump_piece_in_path = jump
+
+        if special_move is not None:
+            self._check_special_move(special_move)
+        else:
+            self.special_move_for_position = {}
+
+    def _check_special_move(self, special_move):
+        if len(special_move) != 2:
+            raise ValueError(MSG_ERROR_LEN.format(&#34;special_move&#34;,
+                                                  2, len(special_move)))
+        self.special_move_for_position = {&#39;positions&#39;: special_move[0],
+                                          &#39;newmove&#39;: special_move[1]}
+
+
+class Point(tuple):
+    &#34;&#34;&#34;tuple (x, y)
+
+    &#34;&#34;&#34;
+    def __new__(cls, x, y):
+        return tuple.__new__(Point, (x, y))
+
+
+class Points(tuple):
+    &#34;&#34;&#34;tuple (tuple (x1, y2), tuple(x2, y2), ...)
+
+    &#34;&#34;&#34;
+    def __new__(cls, *args):
+        return tuple.__new__(Points, (Point(*arg) for arg in args))
+
+
+class ChessBoard():
+    &#34;&#34;&#34;Create chessboard.
+
+    .. versionadded:: 1.0
+
+    Algebraic notation (chess)
+      _______________
+    8|_|_|_|_|_|_|_|_|
+    7|_|_|_|_|_|_|_|_|
+    6|_|_|_|_|_|_|_|_|
+    5|_|_|_|_|_|_|_|_|
+    4|_|_|_|_|_|_|_|_|
+    3|_|_|_|_|_|_|_|_|
+    2|_|_|_|_|_|_|_|_|
+    1|_|_|_|_|_|_|_|_|
+      A B C D E F G H
+
+    Attributes
+    ----------
+    state : list of list
+        8x8 chess board represented in a list of lists.
+        Empty square of the board have a value of 0.
+
+    &#34;&#34;&#34;
+    axis_y = AXIS_Y
+    axis_x = AXIS_X
+    rows = len(axis_y)
+    cols = len(axis_x)
+
+    def __init__(self):
+        self.state = [[0 for i in range(self.cols)] for j in range(self.rows)]
+
+    def _as_number_form(self, position):
+        pos_y = self.axis_y.index(position[0])
+        pos_x = self.axis_x[::-1].index(position[1])
+        return pos_x, pos_y
+
+    def _as_string_form(self, xyposition):
+        if self._is_in_bounds(xyposition):
+            return self.axis_y[xyposition[1]] + self.axis_x[-xyposition[0]-1]
+        else:
+            return &#34;--&#34;
+
+    def _is_in_bounds(self, xyposition):
+        pos_x, pos_y = xyposition
+        return 0 &lt;= pos_x &lt;= self.rows - 1 and 0 &lt;= pos_y &lt;= self.cols - 1
+
+    def _is_empty(self, xyposition):
+        pos_x, pos_y = xyposition
+        return self.state[pos_x][pos_y] != OCCUPY_POSITION
+
+    def _is_valid_position(self, position):
+        position = position.upper()
+        col, row = position
+        return col in self.axis_y and row in self.axis_x
+
+    def is_free_position(self, position):
+        &#34;&#34;&#34;Check a square of the board in position is free
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        Return
+        ------
+        Bool
+            Is empty o not
+        &#34;&#34;&#34;
+
+        xyposition = self._as_number_form(position)
+        return self._is_valid_position(position) and self._is_empty(xyposition)
+
+    def is_free_xyposition(self, xyposition):
+        &#34;&#34;&#34;Check a square of the board in xyposition is free
+
+        Parameters
+        ----------
+        xyposition : Point
+            Position in (x,y)
+
+        Return
+        ------
+        Bool
+            Is empty o not
+        &#34;&#34;&#34;
+
+        return self._is_in_bounds(xyposition) and self._is_empty(xyposition)
+
+    def in_place(self, position):
+        &#34;&#34;&#34;Place a chess piece in one position
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        if self.is_free_position(position):
+            pos_x, pos_y = self._as_number_form(position)
+            self.state[pos_x][pos_y] = OCCUPY_POSITION
+        else:
+            raise ValueError(MSG_ERROR_POS.format(position))
+
+    def mark_place(self, xyposition):
+        &#34;&#34;&#34;Mark a square of the board in xyposition
+
+        Parameters
+        ----------
+        xyposition : Point
+            Position in (x,y)
+
+        &#34;&#34;&#34;
+        if self.is_free_xyposition(xyposition):
+            pos_x, pos_y = xyposition
+            self.state[pos_x][pos_y] = MARK_POSITION
+
+    def __repr__(self):
+        board = self.state.copy()
+        board.extend([[&#34;─&#34;]*self.cols, self.axis_y])
+        new_board = []
+        for i, row in enumerate(board):
+            if i &lt; self.rows:
+                change_row = [&#34; %d|&#34; % (self.rows - i)]
+            else:
+                change_row = [&#34;   &#34;]
+            change_row.extend([str(cell) for cell in row])
+            new_board.append(change_row)
+        list_board = [&#39; &#39;.join([cell for cell in row]) for row in new_board]
+        nice_board = &#39;\n&#39;.join(list_board)
+        return nice_board
+
+
+class ChessPiece(object):
+    &#34;&#34;&#34;Create a chess piece.
+
+    .. versionadded:: 1.0
+
+    Attributes
+    ----------
+    position : str
+       Current position in algebraic notation. Example `A1`
+
+    chessboard: ChessBoard
+        The chessboard where the chess piece moves
+
+    legal_move: Points
+        Legals movements of the chess piece on the chessboard
+
+    color: str
+        The color of the chess piece
+
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self.position = None
+        self.chessboard = None
+        self.legal_moves = None
+        self.color = &#34;white&#34;
+
+    def set_color_black(self):
+        self.color = &#34;black&#34;
+
+    def set_color_white(self):
+        self.color = &#34;white&#34;
+
+    def set_legal_moves(self, position, moves, rules=None):
+        &#34;&#34;&#34;Check that the assigned movements comply with the
+        chess piece&#39;s movement rules
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        moves : Points
+            Assigned movements in a set of (x,y)
+
+        rules : MovesRules, optional
+            Move rule for a chess piece
+
+        Raises
+        ------
+        TypeError
+            If moves&#39;s class is not Points
+            If rules is not None and rules&#39;s class is not MoveRules
+
+        TODO
+        ----
+        More rules, in addition to movement rules, can be added with
+        a Rules parent class.
+
+        &#34;&#34;&#34;
+
+        if isinstance(moves, Points):
+            nrow = self.chessboard.rows - 1
+            ncol = self.chessboard.cols - 1
+            self.legal_moves = Points(*(m for m in moves if abs(m[0]) &lt; nrow
+                                        and abs(m[1]) &lt; ncol))
+        else:
+            s = moves.__class__.__name__
+            raise TypeError(MSG_ERROR_TYPE.format(&#34;Points&#34;, s))
+
+        if rules is None:
+            self.rules_move = MoveRules(
+                max(self.chessboard.rows, self.chessboard.cols))
+        elif isinstance(rules, MoveRules):
+            self.rules_move = rules
+        else:
+            s = rules.__class__.__name__
+            raise TypeError(MSG_ERROR_TYPE.format(&#34;MoveRules&#34;, s))
+
+        check_moves = position in \
+            self.rules_move.special_move_for_position.get(&#34;positions&#34;, {})
+
+        if check_moves:
+            self.legal_moves += \
+                self.rules_move.special_move_for_position[&#34;newmove&#34;]
+
+    def possible_moves(self, position,
+                       moves,
+                       rules=None,
+                       board=None):
+        &#34;&#34;&#34;Check a square of the board where the chess piece can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        moves : Points
+            Assigned movements in a set of (x,y)
+
+        rules : MovesRules, optional
+            Move rule for a chess piece
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        TypeError
+            If moves&#39;s class is not Points
+            If rules is not None and rules&#39;s class is not MoveRules
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        TODO
+        ----
+        More rules, in addition to movement rules, can be added with
+        a Rules parent class.
+
+        &#34;&#34;&#34;
+        self.position = position
+        self.chessboard = ChessBoard() if board is None else board
+        self.chessboard.in_place(position)
+        place = self.chessboard._as_number_form(position)
+
+        self.set_legal_moves(position, moves, rules)
+
+        for move in self.legal_moves:
+            for step in range(1, self.rules_move.max_steps_for_turn + 1):
+                dest = Point(place[0]+move[0]*step, place[1]+move[1]*step)
+
+                dest_is_empty = self.chessboard.is_free_xyposition(dest)
+                piece_can_jump = self.rules_move.jump_piece_in_path
+                stop_move = not dest_is_empty and not piece_can_jump
+                if stop_move:
+                    break
+
+                self.chessboard.mark_place(dest)
+
+    @property
+    def name(self):
+        return self.__class__.__name__
+
+    def __repr__(self):
+        return &#34;&lt;&#34; + self.name + &#34;&gt;&#34;
+
+
+class Pawn(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Pawn
+
+    The Pawn class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Pawn can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), ) if self.color == &#34;white&#34; else Points((1, 0),)
+        positions = (l+&#34;2&#34; for l in AXIS_Y)
+        special = Points((-2, 0),) \
+            if self.color == &#34;white&#34; else Points((2, 0),)
+        rules = MoveRules(1, special_move=(positions, special))
+        return super(Pawn, self).possible_moves(position, moves,
+                                                rules=rules, board=board)
+
+
+class Knight(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Knight
+
+    The Knight class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Knight can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board.
+
+        &#34;&#34;&#34;
+        moves = Points((-2, -1), (-2, 1), (-1, -2), (-1, 2),
+                       (1, -2), (1, 2), (2, -1), (2, 1))
+
+        rules = MoveRules(1, jump=True)
+        return super(Knight, self).possible_moves(position, moves,
+                                                  rules=rules, board=board)
+
+
+class Rook(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Rook
+
+    The Rook class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Rook can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0))
+        return super(Rook, self).possible_moves(position, moves, board=board)
+
+
+class Bishop(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Bishop
+
+    The Bishop class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Bishop can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, -1), (-1, 1), (1, -1), (1, 1))
+        return super(Bishop, self).possible_moves(position, moves, board=board)
+
+
+class Queen(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Queen
+
+    The Queen class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Queen can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                       (-1, -1), (-1, 1), (1, -1), (1, 1))
+        return super(Queen, self).possible_moves(position, moves, board=board)
+
+
+class King(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece King
+
+    The King class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the King can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                       (-1, -1), (-1, 1), (1, -1), (1, 1))
+        rules = MoveRules(1)
+        return super(King, self).possible_moves(position, moves,
+                                                rules=rules, board=board)
+
+
+def show_chessboards():
+    &#34;&#34;&#34;Placing all the chess pieces in a random position,
+    show their possible movements on a chessboard.
+
+    &#34;&#34;&#34;
+    pieces = [Pawn(), Knight(), Bishop(),
+              Rook(), Queen(), King()]
+
+    random_position = random.choice(AXIS_Y) + random.choice(AXIS_X)
+
+    for piece in pieces:
+        piece.possible_moves(random_position)
+        print(&#34;\n**-&gt; &#34; + piece.name + &#39; &lt;-**\n&#39;)
+        print(piece.chessboard)
+
+
+if __name__ == &#34;__main__&#34;:
+    show_chessboards()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="chessboards.chessmoves.show_chessboards"><code class="name flex">
+<span>def <span class="ident">show_chessboards</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Placing all the chess pieces in a random position,
+show their possible movements on a chessboard.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_chessboards():
+    &#34;&#34;&#34;Placing all the chess pieces in a random position,
+    show their possible movements on a chessboard.
+
+    &#34;&#34;&#34;
+    pieces = [Pawn(), Knight(), Bishop(),
+              Rook(), Queen(), King()]
+
+    random_position = random.choice(AXIS_Y) + random.choice(AXIS_X)
+
+    for piece in pieces:
+        piece.possible_moves(random_position)
+        print(&#34;\n**-&gt; &#34; + piece.name + &#39; &lt;-**\n&#39;)
+        print(piece.chessboard)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="chessboards.chessmoves.Bishop"><code class="flex name class">
+<span>class <span class="ident">Bishop</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece Bishop</p>
+<p>The Bishop class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Bishop(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Bishop
+
+    The Bishop class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Bishop can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, -1), (-1, 1), (1, -1), (1, 1))
+        return super(Bishop, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.Bishop.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the Bishop can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the Bishop can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    moves = Points((-1, -1), (-1, 1), (1, -1), (1, 1))
+    return super(Bishop, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard"><code class="flex name class">
+<span>class <span class="ident">ChessBoard</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create chessboard.</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div>
+<p>Algebraic notation (chess)</p>
+<hr>
+<p>8|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+7|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+6|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+5|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+4|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+3|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+2|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+1|<em>|</em>|<em>|</em>|<em>|</em>|<em>|</em>|
+A B C D E F G H</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>state</code></strong> :&ensp;<code>list</code> of <code>list</code></dt>
+<dd>8x8 chess board represented in a list of lists.
+Empty square of the board have a value of 0.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ChessBoard():
+    &#34;&#34;&#34;Create chessboard.
+
+    .. versionadded:: 1.0
+
+    Algebraic notation (chess)
+      _______________
+    8|_|_|_|_|_|_|_|_|
+    7|_|_|_|_|_|_|_|_|
+    6|_|_|_|_|_|_|_|_|
+    5|_|_|_|_|_|_|_|_|
+    4|_|_|_|_|_|_|_|_|
+    3|_|_|_|_|_|_|_|_|
+    2|_|_|_|_|_|_|_|_|
+    1|_|_|_|_|_|_|_|_|
+      A B C D E F G H
+
+    Attributes
+    ----------
+    state : list of list
+        8x8 chess board represented in a list of lists.
+        Empty square of the board have a value of 0.
+
+    &#34;&#34;&#34;
+    axis_y = AXIS_Y
+    axis_x = AXIS_X
+    rows = len(axis_y)
+    cols = len(axis_x)
+
+    def __init__(self):
+        self.state = [[0 for i in range(self.cols)] for j in range(self.rows)]
+
+    def _as_number_form(self, position):
+        pos_y = self.axis_y.index(position[0])
+        pos_x = self.axis_x[::-1].index(position[1])
+        return pos_x, pos_y
+
+    def _as_string_form(self, xyposition):
+        if self._is_in_bounds(xyposition):
+            return self.axis_y[xyposition[1]] + self.axis_x[-xyposition[0]-1]
+        else:
+            return &#34;--&#34;
+
+    def _is_in_bounds(self, xyposition):
+        pos_x, pos_y = xyposition
+        return 0 &lt;= pos_x &lt;= self.rows - 1 and 0 &lt;= pos_y &lt;= self.cols - 1
+
+    def _is_empty(self, xyposition):
+        pos_x, pos_y = xyposition
+        return self.state[pos_x][pos_y] != OCCUPY_POSITION
+
+    def _is_valid_position(self, position):
+        position = position.upper()
+        col, row = position
+        return col in self.axis_y and row in self.axis_x
+
+    def is_free_position(self, position):
+        &#34;&#34;&#34;Check a square of the board in position is free
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        Return
+        ------
+        Bool
+            Is empty o not
+        &#34;&#34;&#34;
+
+        xyposition = self._as_number_form(position)
+        return self._is_valid_position(position) and self._is_empty(xyposition)
+
+    def is_free_xyposition(self, xyposition):
+        &#34;&#34;&#34;Check a square of the board in xyposition is free
+
+        Parameters
+        ----------
+        xyposition : Point
+            Position in (x,y)
+
+        Return
+        ------
+        Bool
+            Is empty o not
+        &#34;&#34;&#34;
+
+        return self._is_in_bounds(xyposition) and self._is_empty(xyposition)
+
+    def in_place(self, position):
+        &#34;&#34;&#34;Place a chess piece in one position
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        if self.is_free_position(position):
+            pos_x, pos_y = self._as_number_form(position)
+            self.state[pos_x][pos_y] = OCCUPY_POSITION
+        else:
+            raise ValueError(MSG_ERROR_POS.format(position))
+
+    def mark_place(self, xyposition):
+        &#34;&#34;&#34;Mark a square of the board in xyposition
+
+        Parameters
+        ----------
+        xyposition : Point
+            Position in (x,y)
+
+        &#34;&#34;&#34;
+        if self.is_free_xyposition(xyposition):
+            pos_x, pos_y = xyposition
+            self.state[pos_x][pos_y] = MARK_POSITION
+
+    def __repr__(self):
+        board = self.state.copy()
+        board.extend([[&#34;─&#34;]*self.cols, self.axis_y])
+        new_board = []
+        for i, row in enumerate(board):
+            if i &lt; self.rows:
+                change_row = [&#34; %d|&#34; % (self.rows - i)]
+            else:
+                change_row = [&#34;   &#34;]
+            change_row.extend([str(cell) for cell in row])
+            new_board.append(change_row)
+        list_board = [&#39; &#39;.join([cell for cell in row]) for row in new_board]
+        nice_board = &#39;\n&#39;.join(list_board)
+        return nice_board</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="chessboards.chessmoves.ChessBoard.axis_x"><code class="name">var <span class="ident">axis_x</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.axis_y"><code class="name">var <span class="ident">axis_y</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.cols"><code class="name">var <span class="ident">cols</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.rows"><code class="name">var <span class="ident">rows</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.ChessBoard.in_place"><code class="name flex">
+<span>def <span class="ident">in_place</span></span>(<span>self, position)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Place a chess piece in one position</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def in_place(self, position):
+    &#34;&#34;&#34;Place a chess piece in one position
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    if self.is_free_position(position):
+        pos_x, pos_y = self._as_number_form(position)
+        self.state[pos_x][pos_y] = OCCUPY_POSITION
+    else:
+        raise ValueError(MSG_ERROR_POS.format(position))</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.is_free_position"><code class="name flex">
+<span>def <span class="ident">is_free_position</span></span>(<span>self, position)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board in position is free</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+</dl>
+<h2 id="return">Return</h2>
+<p>Bool
+Is empty o not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_free_position(self, position):
+    &#34;&#34;&#34;Check a square of the board in position is free
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    Return
+    ------
+    Bool
+        Is empty o not
+    &#34;&#34;&#34;
+
+    xyposition = self._as_number_form(position)
+    return self._is_valid_position(position) and self._is_empty(xyposition)</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.is_free_xyposition"><code class="name flex">
+<span>def <span class="ident">is_free_xyposition</span></span>(<span>self, xyposition)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board in xyposition is free</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>xyposition</code></strong> :&ensp;<code><a title="chessboards.chessmoves.Point" href="#chessboards.chessmoves.Point">Point</a></code></dt>
+<dd>Position in (x,y)</dd>
+</dl>
+<h2 id="return">Return</h2>
+<p>Bool
+Is empty o not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_free_xyposition(self, xyposition):
+    &#34;&#34;&#34;Check a square of the board in xyposition is free
+
+    Parameters
+    ----------
+    xyposition : Point
+        Position in (x,y)
+
+    Return
+    ------
+    Bool
+        Is empty o not
+    &#34;&#34;&#34;
+
+    return self._is_in_bounds(xyposition) and self._is_empty(xyposition)</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessBoard.mark_place"><code class="name flex">
+<span>def <span class="ident">mark_place</span></span>(<span>self, xyposition)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Mark a square of the board in xyposition</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>xyposition</code></strong> :&ensp;<code><a title="chessboards.chessmoves.Point" href="#chessboards.chessmoves.Point">Point</a></code></dt>
+<dd>Position in (x,y)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mark_place(self, xyposition):
+    &#34;&#34;&#34;Mark a square of the board in xyposition
+
+    Parameters
+    ----------
+    xyposition : Point
+        Position in (x,y)
+
+    &#34;&#34;&#34;
+    if self.is_free_xyposition(xyposition):
+        pos_x, pos_y = xyposition
+        self.state[pos_x][pos_y] = MARK_POSITION</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="chessboards.chessmoves.ChessPiece"><code class="flex name class">
+<span>class <span class="ident">ChessPiece</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece.</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<p>Current position in algebraic notation. Example <code>A1</code></p>
+<dl>
+<dt><strong><code>chessboard</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code></dt>
+<dd>The chessboard where the chess piece moves</dd>
+<dt><strong><code>legal_move</code></strong> :&ensp;<code><a title="chessboards.chessmoves.Points" href="#chessboards.chessmoves.Points">Points</a></code></dt>
+<dd>Legals movements of the chess piece on the chessboard</dd>
+<dt><strong><code>color</code></strong> :&ensp;<code>str</code></dt>
+<dd>The color of the chess piece</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ChessPiece(object):
+    &#34;&#34;&#34;Create a chess piece.
+
+    .. versionadded:: 1.0
+
+    Attributes
+    ----------
+    position : str
+       Current position in algebraic notation. Example `A1`
+
+    chessboard: ChessBoard
+        The chessboard where the chess piece moves
+
+    legal_move: Points
+        Legals movements of the chess piece on the chessboard
+
+    color: str
+        The color of the chess piece
+
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self.position = None
+        self.chessboard = None
+        self.legal_moves = None
+        self.color = &#34;white&#34;
+
+    def set_color_black(self):
+        self.color = &#34;black&#34;
+
+    def set_color_white(self):
+        self.color = &#34;white&#34;
+
+    def set_legal_moves(self, position, moves, rules=None):
+        &#34;&#34;&#34;Check that the assigned movements comply with the
+        chess piece&#39;s movement rules
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        moves : Points
+            Assigned movements in a set of (x,y)
+
+        rules : MovesRules, optional
+            Move rule for a chess piece
+
+        Raises
+        ------
+        TypeError
+            If moves&#39;s class is not Points
+            If rules is not None and rules&#39;s class is not MoveRules
+
+        TODO
+        ----
+        More rules, in addition to movement rules, can be added with
+        a Rules parent class.
+
+        &#34;&#34;&#34;
+
+        if isinstance(moves, Points):
+            nrow = self.chessboard.rows - 1
+            ncol = self.chessboard.cols - 1
+            self.legal_moves = Points(*(m for m in moves if abs(m[0]) &lt; nrow
+                                        and abs(m[1]) &lt; ncol))
+        else:
+            s = moves.__class__.__name__
+            raise TypeError(MSG_ERROR_TYPE.format(&#34;Points&#34;, s))
+
+        if rules is None:
+            self.rules_move = MoveRules(
+                max(self.chessboard.rows, self.chessboard.cols))
+        elif isinstance(rules, MoveRules):
+            self.rules_move = rules
+        else:
+            s = rules.__class__.__name__
+            raise TypeError(MSG_ERROR_TYPE.format(&#34;MoveRules&#34;, s))
+
+        check_moves = position in \
+            self.rules_move.special_move_for_position.get(&#34;positions&#34;, {})
+
+        if check_moves:
+            self.legal_moves += \
+                self.rules_move.special_move_for_position[&#34;newmove&#34;]
+
+    def possible_moves(self, position,
+                       moves,
+                       rules=None,
+                       board=None):
+        &#34;&#34;&#34;Check a square of the board where the chess piece can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        moves : Points
+            Assigned movements in a set of (x,y)
+
+        rules : MovesRules, optional
+            Move rule for a chess piece
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        TypeError
+            If moves&#39;s class is not Points
+            If rules is not None and rules&#39;s class is not MoveRules
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        TODO
+        ----
+        More rules, in addition to movement rules, can be added with
+        a Rules parent class.
+
+        &#34;&#34;&#34;
+        self.position = position
+        self.chessboard = ChessBoard() if board is None else board
+        self.chessboard.in_place(position)
+        place = self.chessboard._as_number_form(position)
+
+        self.set_legal_moves(position, moves, rules)
+
+        for move in self.legal_moves:
+            for step in range(1, self.rules_move.max_steps_for_turn + 1):
+                dest = Point(place[0]+move[0]*step, place[1]+move[1]*step)
+
+                dest_is_empty = self.chessboard.is_free_xyposition(dest)
+                piece_can_jump = self.rules_move.jump_piece_in_path
+                stop_move = not dest_is_empty and not piece_can_jump
+                if stop_move:
+                    break
+
+                self.chessboard.mark_place(dest)
+
+    @property
+    def name(self):
+        return self.__class__.__name__
+
+    def __repr__(self):
+        return &#34;&lt;&#34; + self.name + &#34;&gt;&#34;</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.Bishop" href="#chessboards.chessmoves.Bishop">Bishop</a></li>
+<li><a title="chessboards.chessmoves.King" href="#chessboards.chessmoves.King">King</a></li>
+<li><a title="chessboards.chessmoves.Knight" href="#chessboards.chessmoves.Knight">Knight</a></li>
+<li><a title="chessboards.chessmoves.Pawn" href="#chessboards.chessmoves.Pawn">Pawn</a></li>
+<li><a title="chessboards.chessmoves.Queen" href="#chessboards.chessmoves.Queen">Queen</a></li>
+<li><a title="chessboards.chessmoves.Rook" href="#chessboards.chessmoves.Rook">Rook</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="chessboards.chessmoves.ChessPiece.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    return self.__class__.__name__</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.ChessPiece.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, moves, rules=None, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the chess piece can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>moves</code></strong> :&ensp;<code><a title="chessboards.chessmoves.Points" href="#chessboards.chessmoves.Points">Points</a></code></dt>
+<dd>Assigned movements in a set of (x,y)</dd>
+<dt><strong><code>rules</code></strong> :&ensp;<code>MovesRules</code>, optional</dt>
+<dd>Move rule for a chess piece</dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>TypeError</code></dt>
+<dd>If moves's class is not Points
+If rules is not None and rules's class is not MoveRules</dd>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl>
+<h2 id="todo">Todo</h2>
+<p>More rules, in addition to movement rules, can be added with
+a Rules parent class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position,
+                   moves,
+                   rules=None,
+                   board=None):
+    &#34;&#34;&#34;Check a square of the board where the chess piece can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    moves : Points
+        Assigned movements in a set of (x,y)
+
+    rules : MovesRules, optional
+        Move rule for a chess piece
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    TypeError
+        If moves&#39;s class is not Points
+        If rules is not None and rules&#39;s class is not MoveRules
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    TODO
+    ----
+    More rules, in addition to movement rules, can be added with
+    a Rules parent class.
+
+    &#34;&#34;&#34;
+    self.position = position
+    self.chessboard = ChessBoard() if board is None else board
+    self.chessboard.in_place(position)
+    place = self.chessboard._as_number_form(position)
+
+    self.set_legal_moves(position, moves, rules)
+
+    for move in self.legal_moves:
+        for step in range(1, self.rules_move.max_steps_for_turn + 1):
+            dest = Point(place[0]+move[0]*step, place[1]+move[1]*step)
+
+            dest_is_empty = self.chessboard.is_free_xyposition(dest)
+            piece_can_jump = self.rules_move.jump_piece_in_path
+            stop_move = not dest_is_empty and not piece_can_jump
+            if stop_move:
+                break
+
+            self.chessboard.mark_place(dest)</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessPiece.set_color_black"><code class="name flex">
+<span>def <span class="ident">set_color_black</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_color_black(self):
+    self.color = &#34;black&#34;</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessPiece.set_color_white"><code class="name flex">
+<span>def <span class="ident">set_color_white</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_color_white(self):
+    self.color = &#34;white&#34;</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.ChessPiece.set_legal_moves"><code class="name flex">
+<span>def <span class="ident">set_legal_moves</span></span>(<span>self, position, moves, rules=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check that the assigned movements comply with the
+chess piece's movement rules</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>moves</code></strong> :&ensp;<code><a title="chessboards.chessmoves.Points" href="#chessboards.chessmoves.Points">Points</a></code></dt>
+<dd>Assigned movements in a set of (x,y)</dd>
+<dt><strong><code>rules</code></strong> :&ensp;<code>MovesRules</code>, optional</dt>
+<dd>Move rule for a chess piece</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>TypeError</code></dt>
+<dd>If moves's class is not Points
+If rules is not None and rules's class is not MoveRules</dd>
+</dl>
+<h2 id="todo">Todo</h2>
+<p>More rules, in addition to movement rules, can be added with
+a Rules parent class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_legal_moves(self, position, moves, rules=None):
+    &#34;&#34;&#34;Check that the assigned movements comply with the
+    chess piece&#39;s movement rules
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    moves : Points
+        Assigned movements in a set of (x,y)
+
+    rules : MovesRules, optional
+        Move rule for a chess piece
+
+    Raises
+    ------
+    TypeError
+        If moves&#39;s class is not Points
+        If rules is not None and rules&#39;s class is not MoveRules
+
+    TODO
+    ----
+    More rules, in addition to movement rules, can be added with
+    a Rules parent class.
+
+    &#34;&#34;&#34;
+
+    if isinstance(moves, Points):
+        nrow = self.chessboard.rows - 1
+        ncol = self.chessboard.cols - 1
+        self.legal_moves = Points(*(m for m in moves if abs(m[0]) &lt; nrow
+                                    and abs(m[1]) &lt; ncol))
+    else:
+        s = moves.__class__.__name__
+        raise TypeError(MSG_ERROR_TYPE.format(&#34;Points&#34;, s))
+
+    if rules is None:
+        self.rules_move = MoveRules(
+            max(self.chessboard.rows, self.chessboard.cols))
+    elif isinstance(rules, MoveRules):
+        self.rules_move = rules
+    else:
+        s = rules.__class__.__name__
+        raise TypeError(MSG_ERROR_TYPE.format(&#34;MoveRules&#34;, s))
+
+    check_moves = position in \
+        self.rules_move.special_move_for_position.get(&#34;positions&#34;, {})
+
+    if check_moves:
+        self.legal_moves += \
+            self.rules_move.special_move_for_position[&#34;newmove&#34;]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="chessboards.chessmoves.King"><code class="flex name class">
+<span>class <span class="ident">King</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece King</p>
+<p>The King class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class King(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece King
+
+    The King class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the King can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                       (-1, -1), (-1, 1), (1, -1), (1, 1))
+        rules = MoveRules(1)
+        return super(King, self).possible_moves(position, moves,
+                                                rules=rules, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.King.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the King can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the King can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                   (-1, -1), (-1, 1), (1, -1), (1, 1))
+    rules = MoveRules(1)
+    return super(King, self).possible_moves(position, moves,
+                                            rules=rules, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.Knight"><code class="flex name class">
+<span>class <span class="ident">Knight</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece Knight</p>
+<p>The Knight class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Knight(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Knight
+
+    The Knight class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Knight can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board.
+
+        &#34;&#34;&#34;
+        moves = Points((-2, -1), (-2, 1), (-1, -2), (-1, 2),
+                       (1, -2), (1, 2), (2, -1), (2, 1))
+
+        rules = MoveRules(1, jump=True)
+        return super(Knight, self).possible_moves(position, moves,
+                                                  rules=rules, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.Knight.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the Knight can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the Knight can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board.
+
+    &#34;&#34;&#34;
+    moves = Points((-2, -1), (-2, 1), (-1, -2), (-1, 2),
+                   (1, -2), (1, 2), (2, -1), (2, 1))
+
+    rules = MoveRules(1, jump=True)
+    return super(Knight, self).possible_moves(position, moves,
+                                              rules=rules, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.MoveRules"><code class="flex name class">
+<span>class <span class="ident">MoveRules</span></span>
+<span>(</span><span>max_steps, jump=False, special_move=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a move rule for a chess piece in on the chessboard.</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>max_steps</code></strong> :&ensp;<code>int</code></dt>
+<dd>Maximum number of steps per movement in a turn.</dd>
+<dt><strong><code>jump</code></strong> :&ensp;<code>bool</code></dt>
+<dd>If the chess piece can jump occupied squares</dd>
+<dt><strong><code>special_move</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Special movement of the chess piece in certain position
+on the chessboard</dd>
+</dl>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>max_steps</code></strong> :&ensp;<code>positive int</code></dt>
+<dd>Maximum number of steps per movement in a turn.</dd>
+<dt><strong><code>jump</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If the chess piece can jump occupied squares</dd>
+<dt><strong><code>special_move</code></strong> :&ensp;<code>(iterable, <a title="chessboards.chessmoves.Points" href="#chessboards.chessmoves.Points">Points</a>)</code>, optional</dt>
+<dd>Special movement of the chess piece in certain positions
+on the chessboard</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If max_steps is not positive integer
+If special moves has wrong number of elements</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MoveRules():
+    &#34;&#34;&#34;Create a move rule for a chess piece in on the chessboard.
+
+    .. versionadded:: 1.0
+
+    Attributes
+    ----------
+    max_steps : int
+        Maximum number of steps per movement in a turn.
+
+    jump : bool
+        If the chess piece can jump occupied squares
+
+    special_move: dict
+        Special movement of the chess piece in certain position
+        on the chessboard
+
+    &#34;&#34;&#34;
+    def __init__(self, max_steps, jump=False, special_move=None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        max_steps : positive int
+            Maximum number of steps per movement in a turn.
+
+        jump : bool, optional
+            If the chess piece can jump occupied squares
+
+        special_move: (iterable, Points), optional
+            Special movement of the chess piece in certain positions
+            on the chessboard
+
+        Raises
+        ------
+        ValueError
+            If max_steps is not positive integer
+            If special moves has wrong number of elements
+
+        &#34;&#34;&#34;
+
+        if max_steps &lt; 1:
+            raise ValueError(MSG_ERROR_VALUE.format(&#34;max_steps&#34;))
+
+        self.max_steps_for_turn = max_steps
+        self.jump_piece_in_path = jump
+
+        if special_move is not None:
+            self._check_special_move(special_move)
+        else:
+            self.special_move_for_position = {}
+
+    def _check_special_move(self, special_move):
+        if len(special_move) != 2:
+            raise ValueError(MSG_ERROR_LEN.format(&#34;special_move&#34;,
+                                                  2, len(special_move)))
+        self.special_move_for_position = {&#39;positions&#39;: special_move[0],
+                                          &#39;newmove&#39;: special_move[1]}</code></pre>
+</details>
+</dd>
+<dt id="chessboards.chessmoves.Pawn"><code class="flex name class">
+<span>class <span class="ident">Pawn</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece Pawn</p>
+<p>The Pawn class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Pawn(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Pawn
+
+    The Pawn class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Pawn can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), ) if self.color == &#34;white&#34; else Points((1, 0),)
+        positions = (l+&#34;2&#34; for l in AXIS_Y)
+        special = Points((-2, 0),) \
+            if self.color == &#34;white&#34; else Points((2, 0),)
+        rules = MoveRules(1, special_move=(positions, special))
+        return super(Pawn, self).possible_moves(position, moves,
+                                                rules=rules, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.Pawn.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the Pawn can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the Pawn can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    moves = Points((-1, 0), ) if self.color == &#34;white&#34; else Points((1, 0),)
+    positions = (l+&#34;2&#34; for l in AXIS_Y)
+    special = Points((-2, 0),) \
+        if self.color == &#34;white&#34; else Points((2, 0),)
+    rules = MoveRules(1, special_move=(positions, special))
+    return super(Pawn, self).possible_moves(position, moves,
+                                            rules=rules, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.Point"><code class="flex name class">
+<span>class <span class="ident">Point</span></span>
+<span>(</span><span>x, y)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>tuple (x, y)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Point(tuple):
+    &#34;&#34;&#34;tuple (x, y)
+
+    &#34;&#34;&#34;
+    def __new__(cls, x, y):
+        return tuple.__new__(Point, (x, y))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.Points"><code class="flex name class">
+<span>class <span class="ident">Points</span></span>
+<span>(</span><span>*args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>tuple (tuple (x1, y2), tuple(x2, y2), &hellip;)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Points(tuple):
+    &#34;&#34;&#34;tuple (tuple (x1, y2), tuple(x2, y2), ...)
+
+    &#34;&#34;&#34;
+    def __new__(cls, *args):
+        return tuple.__new__(Points, (Point(*arg) for arg in args))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.Queen"><code class="flex name class">
+<span>class <span class="ident">Queen</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece Queen</p>
+<p>The Queen class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Queen(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Queen
+
+    The Queen class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Queen can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                       (-1, -1), (-1, 1), (1, -1), (1, 1))
+        return super(Queen, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.Queen.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the Queen can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the Queen can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    moves = Points((-1, 0), (0, -1), (0, 1), (1, 0),
+                   (-1, -1), (-1, 1), (1, -1), (1, 1))
+    return super(Queen, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="chessboards.chessmoves.Rook"><code class="flex name class">
+<span>class <span class="ident">Rook</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a chess piece Rook</p>
+<p>The Rook class is a subclass of <code>Chess Piece</code>, the attributes
+and methods are listed in the <code>Chess Piece</code> documentation</p>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;1.0</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Rook(ChessPiece):
+    &#34;&#34;&#34;Create a chess piece Rook
+
+    The Rook class is a subclass of `Chess Piece`, the attributes
+    and methods are listed in the `Chess Piece` documentation
+
+    .. versionadded:: 1.0
+
+    &#34;&#34;&#34;
+    def __init__(self):
+        ChessPiece.__init__(self)
+
+    def possible_moves(self, position, board=None):
+        &#34;&#34;&#34;Check a square of the board where the Rook can make a move
+
+        Parameters
+        ----------
+        position : str
+            Position in algebraic notation. Example `A1`
+
+        board: ChessBoard, optional
+            The chessboard where the chess piece moves
+
+        Raises
+        ------
+        ValueError
+            If position is not in algebraic notation or is off the board
+
+        &#34;&#34;&#34;
+        moves = Points((-1, 0), (0, -1), (0, 1), (1, 0))
+        return super(Rook, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="chessboards.chessmoves.Rook.possible_moves"><code class="name flex">
+<span>def <span class="ident">possible_moves</span></span>(<span>self, position, board=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check a square of the board where the Rook can make a move</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>position</code></strong> :&ensp;<code>str</code></dt>
+<dd>Position in algebraic notation. Example <code>A1</code></dd>
+<dt><strong><code>board</code></strong> :&ensp;<code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code>, optional</dt>
+<dd>The chessboard where the chess piece moves</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If position is not in algebraic notation or is off the board</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def possible_moves(self, position, board=None):
+    &#34;&#34;&#34;Check a square of the board where the Rook can make a move
+
+    Parameters
+    ----------
+    position : str
+        Position in algebraic notation. Example `A1`
+
+    board: ChessBoard, optional
+        The chessboard where the chess piece moves
+
+    Raises
+    ------
+    ValueError
+        If position is not in algebraic notation or is off the board
+
+    &#34;&#34;&#34;
+    moves = Points((-1, 0), (0, -1), (0, 1), (1, 0))
+    return super(Rook, self).possible_moves(position, moves, board=board)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></b></code>:
+<ul class="hlist">
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="chessboards" href="index.html">chessboards</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.show_chessboards" href="#chessboards.chessmoves.show_chessboards">show_chessboards</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="chessboards.chessmoves.Bishop" href="#chessboards.chessmoves.Bishop">Bishop</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.Bishop.possible_moves" href="#chessboards.chessmoves.Bishop.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.ChessBoard" href="#chessboards.chessmoves.ChessBoard">ChessBoard</a></code></h4>
+<ul class="two-column">
+<li><code><a title="chessboards.chessmoves.ChessBoard.axis_x" href="#chessboards.chessmoves.ChessBoard.axis_x">axis_x</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.axis_y" href="#chessboards.chessmoves.ChessBoard.axis_y">axis_y</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.cols" href="#chessboards.chessmoves.ChessBoard.cols">cols</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.in_place" href="#chessboards.chessmoves.ChessBoard.in_place">in_place</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.is_free_position" href="#chessboards.chessmoves.ChessBoard.is_free_position">is_free_position</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.is_free_xyposition" href="#chessboards.chessmoves.ChessBoard.is_free_xyposition">is_free_xyposition</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.mark_place" href="#chessboards.chessmoves.ChessBoard.mark_place">mark_place</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessBoard.rows" href="#chessboards.chessmoves.ChessBoard.rows">rows</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.ChessPiece" href="#chessboards.chessmoves.ChessPiece">ChessPiece</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.ChessPiece.name" href="#chessboards.chessmoves.ChessPiece.name">name</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessPiece.possible_moves" href="#chessboards.chessmoves.ChessPiece.possible_moves">possible_moves</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_color_black" href="#chessboards.chessmoves.ChessPiece.set_color_black">set_color_black</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_color_white" href="#chessboards.chessmoves.ChessPiece.set_color_white">set_color_white</a></code></li>
+<li><code><a title="chessboards.chessmoves.ChessPiece.set_legal_moves" href="#chessboards.chessmoves.ChessPiece.set_legal_moves">set_legal_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.King" href="#chessboards.chessmoves.King">King</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.King.possible_moves" href="#chessboards.chessmoves.King.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Knight" href="#chessboards.chessmoves.Knight">Knight</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.Knight.possible_moves" href="#chessboards.chessmoves.Knight.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.MoveRules" href="#chessboards.chessmoves.MoveRules">MoveRules</a></code></h4>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Pawn" href="#chessboards.chessmoves.Pawn">Pawn</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.Pawn.possible_moves" href="#chessboards.chessmoves.Pawn.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Point" href="#chessboards.chessmoves.Point">Point</a></code></h4>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Points" href="#chessboards.chessmoves.Points">Points</a></code></h4>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Queen" href="#chessboards.chessmoves.Queen">Queen</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.Queen.possible_moves" href="#chessboards.chessmoves.Queen.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="chessboards.chessmoves.Rook" href="#chessboards.chessmoves.Rook">Rook</a></code></h4>
+<ul class="">
+<li><code><a title="chessboards.chessmoves.Rook.possible_moves" href="#chessboards.chessmoves.Rook.possible_moves">possible_moves</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
