@@ -1,3 +1,4 @@
+![](Slytherin_Pottermore_S.png)
 # Challenges 🚀
 ---
 
