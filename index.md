@@ -5,7 +5,7 @@ Repository with various challenges performed in python and other languages
 
 ## Content
 
-### [Chessboard](html/chessboards/index.html):trophy:
+### [Chessboard](html/chessboards/index.html) 🛠️ ♚
 
 A Python script that allows you to simulate the movements of all the chess pieces given a random position within the board, the print format of the script should be done like this:
 
@@ -13,7 +13,7 @@ A Python script that allows you to simulate the movements of all the chess piece
 * [1] for their possible locations after movement. 
 * [0] for the positions where the chess piece cannot reach.
 
-### [Algebraic Object](html/algebraic_object/index.html) :symbols:
+### [Algebraic Object](html/algebraic_object/index.html) ✒️ 📄
 
 A class in python that allows you to simulate a polynomial. The operations that are allowed in this element are:
 
