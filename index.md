@@ -5,8 +5,8 @@ Repository with various challenges performed in python and other languages
 
 ## Content
 
-* [Chessboard](chessmoves.html)
-* [Algebraic Object](algebraic_object.html)
+* [Chessboard](html/chessboards/index.html)
+* [Algebraic Object](html/algebraic_object/index.html)
 
 ## Autor
 
