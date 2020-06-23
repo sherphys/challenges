@@ -1,5 +1,6 @@
 """
-Test the Class Polynomial from ``algebraic_object.Polynomial``.
+Test the Class Polynomial from
+``algebraic_object.algebraic_object.Polynomial``.
 
 """
 
